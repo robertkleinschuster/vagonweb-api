@@ -26,7 +26,9 @@ $finder = new DOMXPath($dom);
 $nodes = $finder->query('//*' . selector('.trasa'));
 if ($nodes && $nodes->length > 0) {
     $node = $nodes->item(0);
-    $response['route'] = text_content($node);
+    $route = text_content($node);
+    $routeItems = array_map('trim', explode(',', $route));
+    $response['route'] = array_shift($routeItems) . ' - ' . array_pop($routeItems);
 }
 
 $nodes = $finder->query('//*' . selector('.omezeni_bord div'));
