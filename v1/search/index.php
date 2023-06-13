@@ -14,7 +14,7 @@ $json = file_get_contents($url);
 $results = json_decode($json, true) ?: [];
 echo json_encode(
     array_map(fn($item) => [
-        'type' => $item['druh'],
+        'type' => !str_contains($item['druh'], ':') ? "{$item['zeme']}:{$item['druh']}": $item['druh'],
         'nr' => $item['cislo'],
         'title' => $item['value'],
         'name' => $item['nazev'],
