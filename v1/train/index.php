@@ -40,6 +40,7 @@ if ($nodes && $nodes->length > 0) {
             $response['info'] .= html_content($node);
         }
     }
+    $response['info'] = strip_tags($response['info'], '<div><span><b><i>');
 }
 
 $nodes = $finder->query('//*' . selector('.pikto'));
