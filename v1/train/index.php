@@ -33,8 +33,13 @@ if ($nodes && $nodes->length > 0) {
 
 $nodes = $finder->query('//*' . selector('.omezeni_bord div'));
 if ($nodes && $nodes->length > 0) {
-    $node = $nodes->item(0);
-    $response['info'] = html_content($node);
+    $response['info'] = '';
+    /** @var DOMNode $node */
+    foreach ($nodes as $node) {
+        if (!$node->attributes->getNamedItem('class')) {
+            $response['info'] .= html_content($node);
+        }
+    }
 }
 
 $nodes = $finder->query('//*' . selector('.pikto'));
